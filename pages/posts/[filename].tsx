@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+import FourOhFour from "../404";
 import { Post } from "../../components/post";
 import { getStaticPropsForTina, staticRequest } from "tinacms";
 import { layoutQueryFragment } from "../../components/layout";
@@ -7,7 +9,18 @@ import type { PostsDocument } from "../../.tina/__generated__/types";
 export default function BlogPostPage(
   props: AsyncReturnType<typeof getStaticProps>["props"]
 ) {
+  const { isFallback } = useRouter();
+  console.log("hi?", isFallback);
+  if (isFallback) {
+    console.log("its a fallback");
+    // return <FourOhFour />;
+    return <div>Oh no</div>;
+  }
   return <Post {...props.data.getPostsDocument} />;
+  if (props.data && props.data.getPostsDocument) {
+    return <Post {...props.data.getPostsDocument} />;
+  }
+  return <div>Oh no</div>;
 }
 
 export const getStaticProps = async ({ params }) => {
@@ -34,6 +47,7 @@ export const getStaticProps = async ({ params }) => {
     `,
     variables: { relativePath: `${params.filename}.md` },
   })) as { data: { getPostsDocument: PostsDocument } };
+  console.log("gsp", tinaProps);
   return {
     props: {
       ...tinaProps,
@@ -68,7 +82,7 @@ export const getStaticPaths = async () => {
     paths: postsListData.getPostsList.edges.map((post) => ({
       params: { filename: post.node.sys.filename },
     })),
-    fallback: false,
+    fallback: true,
   };
 };
 
