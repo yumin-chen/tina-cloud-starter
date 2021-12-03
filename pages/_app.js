@@ -18,7 +18,7 @@ const App = ({ Component, pageProps }) => {
         showEditButton={!Boolean(Number(NEXT_PUBLIC_HIDE_EDIT_BUTTON))}
         editMode={
           <TinaCMS
-            branch="main"
+            branch="with-branching"
             clientId={NEXT_PUBLIC_TINA_CLIENT_ID}
             isLocalClient={Boolean(Number(NEXT_PUBLIC_USE_LOCAL_CLIENT))}
             mediaStore={TinaCloudCloudinaryMediaStore}
