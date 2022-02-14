@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "../container";
 import { Section } from "../section";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
-
+export const something = "string" as const;
 export const Content = ({ data, parentField = "" }) => {
   return (
     <Section color={data.color}>

@@ -1,5 +1,7 @@
 import { defineSchema } from "@tinacms/cli";
 import type { TinaTemplate, TinaField } from "@tinacms/cli";
+// This is just for testing
+import { something } from "../components/blocks/content";
 
 const iconSchema: TinaField = {
   type: "object",
@@ -7,7 +9,7 @@ const iconSchema: TinaField = {
   name: "icon",
   fields: [
     {
-      type: "string",
+      type: something,
       label: "Color",
       name: "color",
       options: [
