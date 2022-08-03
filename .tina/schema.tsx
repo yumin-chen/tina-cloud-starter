@@ -4,6 +4,7 @@ import { featureBlockSchema } from "../components/blocks/features";
 import { heroBlockSchema } from "../components/blocks/hero";
 import { testimonialBlockSchema } from "../components/blocks/testimonial";
 import { iconSchema } from "../components/util/icon";
+import { getDay } from "date-fns";
 
 const schema = defineSchema({
   config: {
@@ -29,7 +30,8 @@ const schema = defineSchema({
       fields: [
         {
           type: "string",
-          label: "Title",
+          // Just testing that external libs work
+          label: String(getDay(new Date())),
           name: "title",
         },
         {
