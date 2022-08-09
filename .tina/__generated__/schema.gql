@@ -88,21 +88,37 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter): DocumentConnection!
 }
 
-union DocumentNode = Post | Global | Author | Page
+union DocumentNode = PostBlog1 | PostBlog2 | Global | Author | Page
 
-union PostAuthor = Author
+union PostBlog1Author = Author
 
-type Post implements Node & Document {
+type PostBlog1 implements Node & Document {
   title: String
   heroImg: String
   excerpt: JSON
-  author: PostAuthor
+  author: PostBlog1Author
   date: String
   _body: JSON
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
+
+union PostBlog2Author = Author
+
+type PostBlog2 implements Node & Document {
+  title: String
+  heroImg: String
+  excerpt: JSON
+  author: PostBlog2Author
+  date: String
+  _body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+union Post = PostBlog1 | PostBlog2
 
 input StringFilter {
   startsWith: String
@@ -124,7 +140,7 @@ input RichTextFilter {
   exists: Boolean
 }
 
-input PostAuthorFilter {
+input PostBlog1AuthorFilter {
   author: AuthorFilter
 }
 
@@ -136,35 +152,75 @@ input DatetimeFilter {
   in: [String]
 }
 
-input Post_bodyDateTimeFilter {
+input PostBlog1_bodyDateTimeFilter {
   format: StringFilter
 }
 
-input Post_bodyBlockQuoteFilter {
+input PostBlog1_bodyBlockQuoteFilter {
   children: RichTextFilter
   authorName: StringFilter
 }
 
-input Post_bodyNewsletterSignupFilter {
+input PostBlog1_bodyNewsletterSignupFilter {
   children: RichTextFilter
   placeholder: StringFilter
   buttonText: StringFilter
   disclaimer: RichTextFilter
 }
 
-input Post_bodyFilter {
-  DateTime: Post_bodyDateTimeFilter
-  BlockQuote: Post_bodyBlockQuoteFilter
-  NewsletterSignup: Post_bodyNewsletterSignupFilter
+input PostBlog1_bodyFilter {
+  DateTime: PostBlog1_bodyDateTimeFilter
+  BlockQuote: PostBlog1_bodyBlockQuoteFilter
+  NewsletterSignup: PostBlog1_bodyNewsletterSignupFilter
 }
 
-input PostFilter {
+input PostBlog1Filter {
   title: StringFilter
   heroImg: ImageFilter
   excerpt: RichTextFilter
-  author: PostAuthorFilter
+  author: PostBlog1AuthorFilter
   date: DatetimeFilter
-  _body: Post_bodyFilter
+  _body: PostBlog1_bodyFilter
+}
+
+input PostBlog2AuthorFilter {
+  author: AuthorFilter
+}
+
+input PostBlog2_bodyDateTimeFilter {
+  format: StringFilter
+}
+
+input PostBlog2_bodyBlockQuoteFilter {
+  children: RichTextFilter
+  authorName: StringFilter
+}
+
+input PostBlog2_bodyNewsletterSignupFilter {
+  children: RichTextFilter
+  placeholder: StringFilter
+  buttonText: StringFilter
+  disclaimer: RichTextFilter
+}
+
+input PostBlog2_bodyFilter {
+  DateTime: PostBlog2_bodyDateTimeFilter
+  BlockQuote: PostBlog2_bodyBlockQuoteFilter
+  NewsletterSignup: PostBlog2_bodyNewsletterSignupFilter
+}
+
+input PostBlog2Filter {
+  title: StringFilter
+  heroImg: ImageFilter
+  excerpt: RichTextFilter
+  author: PostBlog2AuthorFilter
+  date: DatetimeFilter
+  _body: PostBlog2_bodyFilter
+}
+
+input PostFilter {
+  blog1: PostBlog1Filter
+  blog2: PostBlog2Filter
 }
 
 type PostConnectionEdges {
@@ -456,13 +512,27 @@ input DocumentMutation {
   page: PageMutation
 }
 
-input PostMutation {
+input PostBlog1Mutation {
   title: String
   heroImg: String
   excerpt: JSON
   author: String
   date: String
   _body: JSON
+}
+
+input PostBlog2Mutation {
+  title: String
+  heroImg: String
+  excerpt: JSON
+  author: String
+  date: String
+  _body: JSON
+}
+
+input PostMutation {
+  blog1: PostBlog1Mutation
+  blog2: PostBlog2Mutation
 }
 
 input GlobalHeaderIconMutation {
