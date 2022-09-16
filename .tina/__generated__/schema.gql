@@ -93,12 +93,12 @@ union DocumentNode = Post | Global | Author | Page
 union PostAuthor = Author
 
 type Post implements Node & Document {
+  _body: JSON
   title: String
   heroImg: String
   excerpt: JSON
   author: PostAuthor
   date: String
-  _body: JSON
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -111,33 +111,14 @@ input StringFilter {
   in: [String]
 }
 
-input ImageFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
+input Post_bodyDateTimeFilter {
+  format: StringFilter
 }
 
 input RichTextFilter {
   startsWith: String
   eq: String
   exists: Boolean
-}
-
-input PostAuthorFilter {
-  author: AuthorFilter
-}
-
-input DatetimeFilter {
-  after: String
-  before: String
-  eq: String
-  exists: Boolean
-  in: [String]
-}
-
-input Post_bodyDateTimeFilter {
-  format: StringFilter
 }
 
 input Post_bodyBlockQuoteFilter {
@@ -158,13 +139,32 @@ input Post_bodyFilter {
   NewsletterSignup: Post_bodyNewsletterSignupFilter
 }
 
+input ImageFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input PostAuthorFilter {
+  author: AuthorFilter
+}
+
+input DatetimeFilter {
+  after: String
+  before: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
 input PostFilter {
+  _body: Post_bodyFilter
   title: StringFilter
   heroImg: ImageFilter
   excerpt: RichTextFilter
   author: PostAuthorFilter
   date: DatetimeFilter
-  _body: Post_bodyFilter
 }
 
 type PostConnectionEdges {
@@ -457,12 +457,12 @@ input DocumentMutation {
 }
 
 input PostMutation {
+  _body: JSON
   title: String
   heroImg: String
   excerpt: JSON
   author: String
   date: String
-  _body: JSON
 }
 
 input GlobalHeaderIconMutation {

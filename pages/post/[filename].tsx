@@ -1,3 +1,6 @@
+import { stringifyMDX } from "@tinacms/mdx";
+import schema from "../../.tina/schema";
+
 import { Post } from "../../components/posts/post";
 import { client } from "../../.tina/__generated__/client";
 import { useTina } from "tinacms/dist/edit-state";
@@ -30,6 +33,12 @@ export const getStaticProps = async ({ params }) => {
   const tinaProps = await client.queries.blogPostQuery({
     relativePath: `${params.filename}.mdx`,
   });
+  const test = stringifyMDX(
+    tinaProps.data.post._body,
+    schema.collections[0].fields[0] as any,
+    (url) => url
+  );
+  console.log({ test });
   return {
     props: {
       ...tinaProps,

@@ -35,36 +35,6 @@ const schema = defineSchema({
       format: "mdx",
       fields: [
         {
-          type: "string",
-          label: "Title",
-          name: "title",
-        },
-        {
-          type: "image",
-          name: "heroImg",
-          label: "Hero Image",
-        },
-        {
-          type: "rich-text",
-          label: "Excerpt",
-          name: "excerpt",
-        },
-        {
-          type: "reference",
-          label: "Author",
-          name: "author",
-          collections: ["author"],
-        },
-        {
-          type: "datetime",
-          label: "Posted Date",
-          name: "date",
-          ui: {
-            dateFormat: "MMMM DD YYYY",
-            timeFormat: "hh:mm A",
-          },
-        },
-        {
           type: "rich-text",
           label: "Body",
           name: "_body",
@@ -132,6 +102,36 @@ const schema = defineSchema({
             },
           ],
           isBody: true,
+        },
+        {
+          type: "string",
+          label: "Title",
+          name: "title",
+        },
+        {
+          type: "image",
+          name: "heroImg",
+          label: "Hero Image",
+        },
+        {
+          type: "rich-text",
+          label: "Excerpt",
+          name: "excerpt",
+        },
+        {
+          type: "reference",
+          label: "Author",
+          name: "author",
+          collections: ["author"],
+        },
+        {
+          type: "datetime",
+          label: "Posted Date",
+          name: "date",
+          ui: {
+            dateFormat: "MMMM DD YYYY",
+            timeFormat: "hh:mm A",
+          },
         },
       ],
     },

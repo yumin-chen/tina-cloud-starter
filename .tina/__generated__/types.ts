@@ -213,12 +213,12 @@ export type PostAuthor = Author;
 
 export type Post = Node & Document & {
   __typename?: 'Post';
+  _body?: Maybe<Scalars['JSON']>;
   title?: Maybe<Scalars['String']>;
   heroImg?: Maybe<Scalars['String']>;
   excerpt?: Maybe<Scalars['JSON']>;
   author?: Maybe<PostAuthor>;
   date?: Maybe<Scalars['String']>;
-  _body?: Maybe<Scalars['JSON']>;
   id: Scalars['ID'];
   _sys: SystemInfo;
   _values: Scalars['JSON'];
@@ -231,33 +231,14 @@ export type StringFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type ImageFilter = {
-  startsWith?: InputMaybe<Scalars['String']>;
-  eq?: InputMaybe<Scalars['String']>;
-  exists?: InputMaybe<Scalars['Boolean']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+export type Post_BodyDateTimeFilter = {
+  format?: InputMaybe<StringFilter>;
 };
 
 export type RichTextFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
   eq?: InputMaybe<Scalars['String']>;
   exists?: InputMaybe<Scalars['Boolean']>;
-};
-
-export type PostAuthorFilter = {
-  author?: InputMaybe<AuthorFilter>;
-};
-
-export type DatetimeFilter = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  eq?: InputMaybe<Scalars['String']>;
-  exists?: InputMaybe<Scalars['Boolean']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
-
-export type Post_BodyDateTimeFilter = {
-  format?: InputMaybe<StringFilter>;
 };
 
 export type Post_BodyBlockQuoteFilter = {
@@ -278,13 +259,32 @@ export type Post_BodyFilter = {
   NewsletterSignup?: InputMaybe<Post_BodyNewsletterSignupFilter>;
 };
 
+export type ImageFilter = {
+  startsWith?: InputMaybe<Scalars['String']>;
+  eq?: InputMaybe<Scalars['String']>;
+  exists?: InputMaybe<Scalars['Boolean']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type PostAuthorFilter = {
+  author?: InputMaybe<AuthorFilter>;
+};
+
+export type DatetimeFilter = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  eq?: InputMaybe<Scalars['String']>;
+  exists?: InputMaybe<Scalars['Boolean']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
 export type PostFilter = {
+  _body?: InputMaybe<Post_BodyFilter>;
   title?: InputMaybe<StringFilter>;
   heroImg?: InputMaybe<ImageFilter>;
   excerpt?: InputMaybe<RichTextFilter>;
   author?: InputMaybe<PostAuthorFilter>;
   date?: InputMaybe<DatetimeFilter>;
-  _body?: InputMaybe<Post_BodyFilter>;
 };
 
 export type PostConnectionEdges = {
@@ -678,12 +678,12 @@ export type DocumentMutation = {
 };
 
 export type PostMutation = {
+  _body?: InputMaybe<Scalars['JSON']>;
   title?: InputMaybe<Scalars['String']>;
   heroImg?: InputMaybe<Scalars['String']>;
   excerpt?: InputMaybe<Scalars['JSON']>;
   author?: InputMaybe<Scalars['String']>;
   date?: InputMaybe<Scalars['String']>;
-  _body?: InputMaybe<Scalars['JSON']>;
 };
 
 export type GlobalHeaderIconMutation = {
@@ -812,9 +812,9 @@ export type BlogPostQueryQueryVariables = Exact<{
 }>;
 
 
-export type BlogPostQueryQuery = { __typename?: 'Query', post: { __typename?: 'Post', title?: string | null, heroImg?: string | null, excerpt?: any | null, date?: string | null, _body?: any | null, author?: { __typename?: 'Author', name?: string | null, avatar?: string | null, id: string } | null }, global: { __typename?: 'Global', header?: { __typename: 'GlobalHeader', color?: string | null, icon?: { __typename: 'GlobalHeaderIcon', color?: string | null, style?: string | null, name?: string | null } | null, nav?: Array<{ __typename: 'GlobalHeaderNav', href?: string | null, label?: string | null } | null> | null } | null, footer?: { __typename: 'GlobalFooter', color?: string | null, social?: { __typename: 'GlobalFooterSocial', facebook?: string | null, twitter?: string | null, instagram?: string | null, github?: string | null } | null } | null, theme?: { __typename: 'GlobalTheme', color?: string | null, font?: string | null, icon?: string | null, darkMode?: string | null } | null } };
+export type BlogPostQueryQuery = { __typename?: 'Query', post: { __typename?: 'Post', _body?: any | null, title?: string | null, heroImg?: string | null, excerpt?: any | null, date?: string | null, author?: { __typename?: 'Author', name?: string | null, avatar?: string | null, id: string } | null }, global: { __typename?: 'Global', header?: { __typename: 'GlobalHeader', color?: string | null, icon?: { __typename: 'GlobalHeaderIcon', color?: string | null, style?: string | null, name?: string | null } | null, nav?: Array<{ __typename: 'GlobalHeaderNav', href?: string | null, label?: string | null } | null> | null } | null, footer?: { __typename: 'GlobalFooter', color?: string | null, social?: { __typename: 'GlobalFooterSocial', facebook?: string | null, twitter?: string | null, instagram?: string | null, github?: string | null } | null } | null, theme?: { __typename: 'GlobalTheme', color?: string | null, font?: string | null, icon?: string | null, darkMode?: string | null } | null } };
 
-export type PostPartsFragment = { __typename?: 'Post', title?: string | null, heroImg?: string | null, excerpt?: any | null, date?: string | null, _body?: any | null, author?: { __typename?: 'Author', name?: string | null, avatar?: string | null, id: string } | null };
+export type PostPartsFragment = { __typename?: 'Post', _body?: any | null, title?: string | null, heroImg?: string | null, excerpt?: any | null, date?: string | null, author?: { __typename?: 'Author', name?: string | null, avatar?: string | null, id: string } | null };
 
 export type GlobalPartsFragment = { __typename?: 'Global', header?: { __typename: 'GlobalHeader', color?: string | null, icon?: { __typename: 'GlobalHeaderIcon', color?: string | null, style?: string | null, name?: string | null } | null, nav?: Array<{ __typename: 'GlobalHeaderNav', href?: string | null, label?: string | null } | null> | null } | null, footer?: { __typename: 'GlobalFooter', color?: string | null, social?: { __typename: 'GlobalFooterSocial', facebook?: string | null, twitter?: string | null, instagram?: string | null, github?: string | null } | null } | null, theme?: { __typename: 'GlobalTheme', color?: string | null, font?: string | null, icon?: string | null, darkMode?: string | null } | null };
 
@@ -827,7 +827,7 @@ export type PostQueryVariables = Exact<{
 }>;
 
 
-export type PostQuery = { __typename?: 'Query', post: { __typename?: 'Post', id: string, title?: string | null, heroImg?: string | null, excerpt?: any | null, date?: string | null, _body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, author?: { __typename?: 'Author', name?: string | null, avatar?: string | null, id: string } | null } };
+export type PostQuery = { __typename?: 'Query', post: { __typename?: 'Post', id: string, _body?: any | null, title?: string | null, heroImg?: string | null, excerpt?: any | null, date?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, author?: { __typename?: 'Author', name?: string | null, avatar?: string | null, id: string } | null } };
 
 export type PostConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']>;
@@ -839,7 +839,7 @@ export type PostConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PostConnectionQuery = { __typename?: 'Query', postConnection: { __typename?: 'PostConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PostConnectionEdges', node?: { __typename?: 'Post', id: string, title?: string | null, heroImg?: string | null, excerpt?: any | null, date?: string | null, _body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, author?: { __typename?: 'Author', name?: string | null, avatar?: string | null, id: string } | null } | null } | null> | null } };
+export type PostConnectionQuery = { __typename?: 'Query', postConnection: { __typename?: 'PostConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PostConnectionEdges', node?: { __typename?: 'Post', id: string, _body?: any | null, title?: string | null, heroImg?: string | null, excerpt?: any | null, date?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, author?: { __typename?: 'Author', name?: string | null, avatar?: string | null, id: string } | null } | null } | null> | null } };
 
 export type GlobalQueryVariables = Exact<{
   relativePath: Scalars['String'];
@@ -944,6 +944,7 @@ export const LayoutQueryFragmentFragmentDoc = gql`
     ${GlobalPartsFragmentDoc}`;
 export const PostPartsFragmentDoc = gql`
     fragment PostParts on Post {
+  _body
   title
   heroImg
   excerpt
@@ -957,7 +958,6 @@ export const PostPartsFragmentDoc = gql`
     }
   }
   date
-  _body
 }
     `;
 export const AuthorPartsFragmentDoc = gql`

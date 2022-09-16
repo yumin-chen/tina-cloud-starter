@@ -1,4 +1,5 @@
 fragment PostParts on Post {
+  _body
   title
   heroImg
   excerpt
@@ -12,7 +13,6 @@ fragment PostParts on Post {
     }
   }
   date
-  _body
 }
 
 fragment GlobalParts on Global {
