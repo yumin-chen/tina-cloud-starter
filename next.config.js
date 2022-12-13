@@ -9,15 +9,35 @@ module.exports = {
     return config;
   },
   async rewrites() {
-    return [
-      {
-        source: "/",
-        destination: "/home",
-      },
-      {
-        source: "/admin",
-        destination: "/admin/index.html",
-      },
-    ];
+    return {
+      beforeFiles: [
+        {
+          source: "/",
+          destination: "/home",
+        },
+        {
+          source: "/admin",
+          destination: "/admin/index.html",
+        },
+      ],
+      afterFiles: [
+        {
+          source: "/:path*",
+          has: [
+            {
+              type: "header",
+              key: "sec-fetch-dest",
+              value: "document",
+            },
+            {
+              type: "cookie",
+              key: "tina_auth",
+              value: "true",
+            },
+          ],
+          destination: "http://localhost:3000/admin#/~/:path*",
+        },
+      ],
+    };
   },
 };
