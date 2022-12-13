@@ -53,7 +53,7 @@ module.exports = {
           },
           {
             type: "cookie",
-            key: "tina_auth",
+            key: "tina-edit",
             value: "true",
           },
         ],
