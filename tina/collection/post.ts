@@ -1,4 +1,5 @@
 import type { Collection } from "tinacms";
+import { tinaTableTemplate } from "tinacms";
 
 const Post: Collection = {
   label: "Blog Posts",
@@ -48,6 +49,7 @@ const Post: Collection = {
       label: "Body",
       name: "_body",
       templates: [
+        tinaTableTemplate,
         {
           name: "DateTime",
           label: "Date & Time",
