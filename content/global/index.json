@@ -1,9 +1,9 @@
 {
   "header": {
     "icon": {
-      "name": "Tina",
-      "color": "orange",
-      "style": "float"
+      "name": "BiLogoCPlusPlus",
+      "color": "teal",
+      "style": "circle"
     },
     "name": "App Name",
     "color": "default",
